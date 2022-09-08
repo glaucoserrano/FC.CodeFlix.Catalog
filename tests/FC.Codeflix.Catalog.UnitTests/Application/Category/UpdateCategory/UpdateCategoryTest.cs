@@ -3,12 +3,12 @@ using Moq;
 using Xunit;
 using FluentAssertions;
 using useCase = FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-using FC.Codeflix.Catalog.Domain.Entity;
+using Entity = FC.Codeflix.Catalog.Domain.Entity;
 using FC.Codeflix.Catalog.Application.Exceptions;
 using FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 using FC.Codeflix.Catalog.Domain.Exceptions;
 
-namespace FC.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+namespace FC.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 [Collection(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryTest
 {
@@ -18,22 +18,22 @@ public class UpdateCategoryTest
     {
         _fixture = fixture;
     }
-    
-    [Theory(DisplayName =nameof(UpdateCategory))]
-    [Trait("Application","UpdateCategory - Use Cases")]
+
+    [Theory(DisplayName = nameof(UpdateCategory))]
+    [Trait("Application", "UpdateCategory - Use Cases")]
     [MemberData(
         nameof(UpdateCategoryTestDataGenerator.GetCategoriesToUpdate),
         parameters: 10,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategory(
-        Category exampleCategory,
-        useCase.UpdateCategoryInput input
+        Entity.Category exampleCategory,
+        UpdateCategoryInput input
         )
     {
         var repositoryMock = _fixture.GetRepositoryMock();
         var unitOfWorkMock = _fixture.GetUniOfWorkMock();
-        
+
         repositoryMock.Setup(x => x.Get(
             exampleCategory.Id,
             It.IsAny<CancellationToken>()
@@ -70,7 +70,7 @@ public class UpdateCategoryTest
 
     [Fact(DisplayName = nameof(ThrowWhenCategoryNotFound))]
     [Trait("Application", "UpdateCategory - Use Cases")]
-    
+
     public async Task ThrowWhenCategoryNotFound()
     {
         var repositoryMock = _fixture.GetRepositoryMock();
@@ -91,16 +91,16 @@ public class UpdateCategoryTest
             unitOfWorkMock.Object
             );
 
-        var task = async  () => await useCase.Handle(input, CancellationToken.None);
-        
+        var task = async () => await useCase.Handle(input, CancellationToken.None);
+
         await task.Should().ThrowAsync<NotFoundException>();
-        
+
         repositoryMock.Verify(x => x.Get(
             input.Id,
             It.IsAny<CancellationToken>()
             ), Times.Once
         );
-        
+
     }
 
     [Theory(DisplayName = nameof(UpdateCategoryWithoutProvidingIsActive))]
@@ -111,11 +111,11 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryWithoutProvidingIsActive(
-        Category exampleCategory,
-        useCase.UpdateCategoryInput exampleInput
+        Entity.Category exampleCategory,
+        UpdateCategoryInput exampleInput
     )
     {
-        var input = new useCase.UpdateCategoryInput(
+        var input = new UpdateCategoryInput(
             exampleInput.Id,
             exampleInput.Name,
             exampleInput.Description
@@ -164,11 +164,11 @@ public class UpdateCategoryTest
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task UpdateCategoryOnlyName(
-    Category exampleCategory,
-    useCase.UpdateCategoryInput exampleInput
+    Entity.Category exampleCategory,
+    UpdateCategoryInput exampleInput
     )
     {
-        var input = new useCase.UpdateCategoryInput(
+        var input = new UpdateCategoryInput(
             exampleInput.Id,
             exampleInput.Name
             );
@@ -208,15 +208,15 @@ public class UpdateCategoryTest
             ), Times.Once
         );
     }
-    [Theory(DisplayName =nameof(ThrowWhenCantUpdateCategory))]
+    [Theory(DisplayName = nameof(ThrowWhenCantUpdateCategory))]
     [Trait("Application", "UpdateCategory - Use Cases")]
     [MemberData(nameof(
         UpdateCategoryTestDataGenerator.GetInvalidInputs),
-        parameters:12,
+        parameters: 12,
         MemberType = typeof(UpdateCategoryTestDataGenerator)
     )]
     public async Task ThrowWhenCantUpdateCategory(
-        UpdateCategoryInput input, 
+        UpdateCategoryInput input,
         string expectedExceptionMessage
         )
     {

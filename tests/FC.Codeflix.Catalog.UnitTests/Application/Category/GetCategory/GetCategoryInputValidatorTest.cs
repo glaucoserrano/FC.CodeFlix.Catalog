@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace FC.Codeflix.Catalog.UnitTests.Application.GetCategory;
+namespace FC.Codeflix.Catalog.UnitTests.Application.Category.GetCategory;
 [Collection(nameof(GetCategoryTestFixture))]
 public class GetCategoryInputValidatorTest
 {
@@ -12,7 +12,7 @@ public class GetCategoryInputValidatorTest
     {
         _fixture = fixture;
     }
-    [Fact(DisplayName =nameof(ValidationOk))]
+    [Fact(DisplayName = nameof(ValidationOk))]
     [Trait("Application", "GetCategoryInputValidation - Use Cases")]
     public void ValidationOk()
     {

@@ -1,12 +1,10 @@
-﻿using FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
-
-namespace FC.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
+﻿namespace FC.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
 public class UpdateCategoryTestDataGenerator
 {
     public static IEnumerable<object[]> GetCategoriesToUpdate(int times = 10)
     {
         var fixture = new UpdateCategoryTestFixture();
-        for(int indice = 0; indice < times; indice++)
+        for (int indice = 0; indice < times; indice++)
         {
             var exampleCategory = fixture.GetExampleCategory();
             var exampleinput = fixture.GetValidInput(exampleCategory.Id);
@@ -18,10 +16,10 @@ public class UpdateCategoryTestDataGenerator
             };
         }
     }
-    public static IEnumerable<Object[]> GetInvalidInputs(int times = 12)
+    public static IEnumerable<object[]> GetInvalidInputs(int times = 12)
     {
         var fixture = new UpdateCategoryTestFixture();
-        var invalidInputsList = new List<Object[]>();
+        var invalidInputsList = new List<object[]>();
         var totalInvalidCases = 3;
 
         for (int index = 0; index < times; index++)

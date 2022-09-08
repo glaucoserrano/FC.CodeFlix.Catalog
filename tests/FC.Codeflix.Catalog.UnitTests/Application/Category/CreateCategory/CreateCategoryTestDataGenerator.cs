@@ -1,11 +1,10 @@
-﻿
-namespace FC.Codeflix.Catalog.UnitTests.Application.CreateCategory;
+﻿namespace FC.Codeflix.Catalog.UnitTests.Application.Category.CreateCategory;
 public class CreateCategoryTestDataGenerator
 {
-    public static IEnumerable<Object[]> GetInvalidInputs(int times = 12)
+    public static IEnumerable<object[]> GetInvalidInputs(int times = 12)
     {
         var fixture = new CreateCategoryTestFixture();
-        var invalidInputsList = new List<Object[]>();
+        var invalidInputsList = new List<object[]>();
         var totalInvalidCases = 4;
 
         for (int index = 0; index < times; index++)

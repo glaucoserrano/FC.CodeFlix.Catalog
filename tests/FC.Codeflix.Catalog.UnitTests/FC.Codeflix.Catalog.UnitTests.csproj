@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Application\DeleteCategory\DeleteCategoryInputValidatorTest.cs" />
+    <Compile Remove="Application\Category\DeleteCategory\DeleteCategoryInputValidatorTest.cs" />
   </ItemGroup>
 
   <ItemGroup>

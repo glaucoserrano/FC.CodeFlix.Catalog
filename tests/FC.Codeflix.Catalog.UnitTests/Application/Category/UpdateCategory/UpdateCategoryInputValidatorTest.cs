@@ -3,8 +3,8 @@ using FC.Codeflix.Catalog.Application.UseCases.Category.UpdateCategory;
 using FluentAssertions;
 using System.Runtime.ConstrainedExecution;
 
-namespace FC.Codeflix.Catalog.UnitTests.Application.UpdateCategory;
-[Collection (nameof(UpdateCategoryTestFixture))]
+namespace FC.Codeflix.Catalog.UnitTests.Application.Category.UpdateCategory;
+[Collection(nameof(UpdateCategoryTestFixture))]
 public class UpdateCategoryInputValidatorTest
 {
     private readonly UpdateCategoryTestFixture _fixture;
@@ -14,9 +14,9 @@ public class UpdateCategoryInputValidatorTest
         _fixture = fixture;
     }
 
-    [Fact(DisplayName =nameof(DontValidateWhenEmptyGuid))]
+    [Fact(DisplayName = nameof(DontValidateWhenEmptyGuid))]
     [Trait("Application", "UpdateCategoryInputValidatorTest - Use Cases")]
-    public  void DontValidateWhenEmptyGuid()
+    public void DontValidateWhenEmptyGuid()
     {
         var input = _fixture.GetValidInput(Guid.Empty);
 
@@ -44,6 +44,6 @@ public class UpdateCategoryInputValidatorTest
         validateResult.Should().NotBeNull();
         validateResult.IsValid.Should().BeTrue();
         validateResult.Errors.Should().HaveCount(0);
-        
+
     }
 }
