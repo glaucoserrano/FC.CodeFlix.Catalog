@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.Codeflix.Catalog.UnitTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.Codeflix.Catalog.Domain", "src\FC.Codeflix.Catalog.Domain\FC.Codeflix.Catalog.Domain.csproj", "{6C91E906-730A-409C-9F7C-EA7DE5E2132D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Application", "src\FC.Codeflix.Catalog.Application\FC.Codeflix.Catalog.Application.csproj", "{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FC.Codeflix.Catalog.Application", "src\FC.Codeflix.Catalog.Application\FC.Codeflix.Catalog.Application.csproj", "{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.IntegrationTest", "tests\FC.Codeflix.Catalog.IntegrationTest\FC.Codeflix.Catalog.IntegrationTest.csproj", "{91A04868-47CD-4E36-A4D3-897E7D129710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Infra.DataEF", "src\FC.Codeflix.Catalog.Infra.DataEF\FC.Codeflix.Catalog.Infra.DataEF.csproj", "{B8E623F4-B4EB-4B49-88D5-47F4A3409624}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,14 @@ Global
 		{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A04868-47CD-4E36-A4D3-897E7D129710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A04868-47CD-4E36-A4D3-897E7D129710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A04868-47CD-4E36-A4D3-897E7D129710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A04868-47CD-4E36-A4D3-897E7D129710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E623F4-B4EB-4B49-88D5-47F4A3409624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E623F4-B4EB-4B49-88D5-47F4A3409624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E623F4-B4EB-4B49-88D5-47F4A3409624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E623F4-B4EB-4B49-88D5-47F4A3409624}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +51,8 @@ Global
 		{7C61EF3C-A6C9-4AD9-B73A-225942E016F2} = {524084B7-A580-4DC8-A1CC-DCC130E80DFE}
 		{6C91E906-730A-409C-9F7C-EA7DE5E2132D} = {8A33E025-4A01-4E68-A7BF-74626C8A6FCA}
 		{A3F7BE55-C3B4-48A0-BE93-A7474CC734E4} = {8A33E025-4A01-4E68-A7BF-74626C8A6FCA}
+		{91A04868-47CD-4E36-A4D3-897E7D129710} = {524084B7-A580-4DC8-A1CC-DCC130E80DFE}
+		{B8E623F4-B4EB-4B49-88D5-47F4A3409624} = {8A33E025-4A01-4E68-A7BF-74626C8A6FCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D2EF0009-4046-4189-82AC-574471F1109A}
