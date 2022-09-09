@@ -1,5 +1,5 @@
 ﻿using FC.Codeflix.Catalog.Domain.Entity;
-using FC.Codeflix.Catalog.Infra.DataEF.Configurations;
+using FC.Codeflix.Catalog.Infra.DataEF.FC.Codeflix.Catalog.Infra.DataEF.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace FC.Codeflix.Catalog.Infra.DataEF;

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FC.Codeflix.Catalog.Infra.DataEF", "src\FC.Codeflix.Catalog.Infra.DataEF\FC.Codeflix.Catalog.Infra.DataEF.csproj", "{B8E623F4-B4EB-4B49-88D5-47F4A3409624}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BE463E18-C66A-45ED-9346-57D0127AACEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

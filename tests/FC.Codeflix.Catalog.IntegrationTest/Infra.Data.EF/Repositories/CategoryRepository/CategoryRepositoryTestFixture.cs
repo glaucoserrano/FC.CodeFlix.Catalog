@@ -1,8 +1,6 @@
 ﻿using FC.Codeflix.Catalog.Domain.Entity;
-using FC.Codeflix.Catalog.Domain.SeedWork;
-using FC.Codeflix.Catalog.Infra.DataEF;
+using FC.Codeflix.Catalog.Domain.SeedWork.SearchableRepository;
 using FC.Codeflix.Catalog.IntegrationTest.Base;
-using Microsoft.EntityFrameworkCore;
 using Xunit;
 
 namespace FC.Codeflix.Catalog.IntegrationTest.Infra.Data.EF.Repositories.CategoryRepository;
@@ -36,15 +34,33 @@ public class CategoryRepositoryTestFixture : BaseFixture
         GetValidCategoryDescription(),
         GetRandomBoolean()
     );
-    public CodeflixCatalogDbContext CreateDbContext()
-       => new(
-           new DbContextOptionsBuilder<CodeflixCatalogDbContext>()
-           .UseInMemoryDatabase("integration-test-db")
-           .Options
-           );
-
     public List<Category> GetExampleCategoriesList(int length = 10)
         => Enumerable.Range(1, length).Select(_ => GetExampleCategory()).ToList();
+
+ 
+    public List<Category> CloneCategoriesListOrdered(List<Category> categoryList,string orderBy, SearchOrder order)
+    {
+        var listClone = new List<Category>(categoryList);
+        var OrderedEnumerable = (orderBy.ToLower(), order) switch
+        {
+            ("name",SearchOrder.Asc) => listClone.OrderBy(x => x.Name),
+            ("name",SearchOrder.Desc) => listClone.OrderByDescending(x => x.Name),
+            ("id", SearchOrder.Asc) => listClone.OrderBy(x => x.Id),
+            ("id",SearchOrder.Desc) => listClone.OrderByDescending(x => x.Id),
+            ("createdat", SearchOrder.Asc) => listClone.OrderBy(x => x.CreatedAt),
+            ("createdat", SearchOrder.Desc) => listClone.OrderByDescending(x => x.CreatedAt),
+            _ => listClone.OrderBy(x => x.Name),
+        };
+
+        return OrderedEnumerable.ToList();
+    }
+    public List<Category> GetExampleCategoriesListWithNames(List<string> names)
+     => names.Select(name =>
+     {
+         var category = GetExampleCategory();
+         category.Update(name);
+         return category;
+     }).ToList();
 }
 
 
