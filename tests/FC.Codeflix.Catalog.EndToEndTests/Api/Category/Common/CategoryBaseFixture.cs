@@ -1,4 +1,5 @@
-﻿using FC.Codeflix.Catalog.EndToEndTests.Base;
+﻿using FC.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
+using FC.Codeflix.Catalog.EndToEndTests.Base;
 using DomainEntity = FC.Codeflix.Catalog.Domain.Entity;
 
 namespace FC.Codeflix.Catalog.EndToEndTests.Api.Category.Common;
@@ -31,5 +32,27 @@ public class CategoryBaseFixture : BaseFixture
     }
     public bool GetRandomBoolean() => new Random().NextDouble() < 0.5;
 
+    public string GetInvalidShortName() => 
+        Faker.Commerce.ProductName()[..2];
     
+
+    public string GetInvalidTooLongName()
+    {
+        var tooLongNameCategory = Faker.Commerce.ProductName();
+        while (tooLongNameCategory.Length <= 255)
+            tooLongNameCategory = $"{tooLongNameCategory} {Faker.Commerce.ProductName()}";
+
+        return tooLongNameCategory;
+
+    }
+    
+    public string GetInvalidTooLongDescription()
+    {
+        var tooLongDescriptionCategory = Faker.Commerce.ProductDescription();
+        while (tooLongDescriptionCategory.Length <= 10_000)
+            tooLongDescriptionCategory = $"{tooLongDescriptionCategory} {Faker.Commerce.ProductDescription()}";
+
+        return tooLongDescriptionCategory;
+
+    }
 }
