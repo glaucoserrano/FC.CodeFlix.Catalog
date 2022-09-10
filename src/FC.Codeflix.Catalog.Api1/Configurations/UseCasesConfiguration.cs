@@ -4,20 +4,22 @@ using FC.Codeflix.Catalog.Domain.Repository;
 using FC.Codeflix.Catalog.Infra.DataEF;
 using FC.Codeflix.Catalog.Infra.DataEF.Repositories;
 using MediatR;
+
 namespace FC.Codeflix.Catalog.Api.Configurations;
 
 public static class UseCasesConfiguration
 {
-    public static IServiceCollection AddUseCase(this IServiceCollection services)
+    public static IServiceCollection AddUseCases(this IServiceCollection services)
     {
         services.AddMediatR(typeof(CreateCategory));
-        services.AddRepositories();
+        services.AddRespositories();
         return services;
     }
-    private static IServiceCollection AddRepositories(this IServiceCollection services)
+
+    private static IServiceCollection AddRespositories(this IServiceCollection services)
     {
         services.AddTransient<ICategoryRepository, CategoryRepository>();
-        services.AddTransient<IUnitOfWork,UnitOfWork>();
+        services.AddTransient<IUnitOfWork, UnitOfWork>();
         return services;
     }
 }
