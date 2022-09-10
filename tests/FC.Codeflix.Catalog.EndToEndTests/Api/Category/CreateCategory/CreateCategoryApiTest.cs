@@ -2,6 +2,7 @@
 using DomainEntity = FC.Codeflix.Catalog.Domain.Entity;
 using FluentAssertions;
 using Xunit;
+using System.Net;
 
 namespace FC.Codeflix.Catalog.EndToEndTests.Api.Category.CreateCategory;
 [Collection(nameof(CreateCategoryApiTestFixture))]
@@ -17,22 +18,24 @@ public class CreateCategoryApiTest
     {
         var input = _fixture.getExampleInput();
 
-        CategoryModelOutput output = await _fixture.ApiClient
+        var (response,output) = await _fixture.ApiClient
             .Post<CategoryModelOutput>(
                 "/categories",
                 input
              );
+        response.Should().NotBeNull();
+        response!.StatusCode.Should().Be(HttpStatusCode.Created);
         output.Should().NotBeNull();
-        output.Name.Should().Be(input.Name);
+        output!.Name.Should().Be(input.Name);
         output.Id.Should().NotBeEmpty();
         output.Description.Should().Be(input.Description);
         output.IsActive.Should().Be(input.IsActive);
         output.CreatedAt.Should().NotBeSameDateAs(default);
 
-        DomainEntity.Category dbCategory = await _fixture.Persistence.GetById(output.Id);
+        var dbCategory = await _fixture.Persistence.GetById(output.Id);
 
         dbCategory.Should().NotBeNull();
-        dbCategory.Name.Should().Be(input.Name);
+        dbCategory!.Name.Should().Be(input.Name);
         dbCategory.Id.Should().NotBeEmpty();
         dbCategory.Description.Should().Be(input.Description);
         dbCategory.IsActive.Should().Be(input.IsActive);
