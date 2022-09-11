@@ -1,5 +1,7 @@
 using FC.Codeflix.Catalog.Application.UseCases.Category.Commom;
 using FC.Codeflix.Catalog.Application.UseCases.Category.CreateCategory;
+using FC.Codeflix.Catalog.Application.UseCases.Category.DeleteCategory;
+using FC.Codeflix.Catalog.Application.UseCases.Category.GetCategory;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,16 +15,35 @@ public class CategoriesController : ControllerBase
     public CategoriesController(IMediator mediator) => _mediator = mediator;
 
     [HttpPost]
-    [ProducesResponseType(typeof(CategoryModelOutput),StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Create([FromBody] CreateCategoryInput input,CancellationToken cancellationToken)
+    [ProducesResponseType(typeof(CategoryModelOutput), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> Create([FromBody] CreateCategoryInput input, CancellationToken cancellationToken)
     {
-        CategoryModelOutput output = await _mediator.Send(input,cancellationToken);
+        CategoryModelOutput output = await _mediator.Send(input, cancellationToken);
         return CreatedAtAction(
             nameof(Create),
             new { output.Id },
             output
         );
     }
+    [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(CategoryModelOutput), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        CategoryModelOutput output = await _mediator.Send(new GetCategoryInput(id), cancellationToken);
+        return Ok(output);
+    }
+    
+    [HttpDelete("{id:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
+    {
+        await _mediator.Send(new DeleteCategoryInput(id), cancellationToken);
+        return NoContent();
+    }
+
+
 }
